@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+    <title>Cadastro de Clientes</title>
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+</head>
+
+<body>
+
+<main class="container">
+    <section class="card">
+        <header class="header">
+            <h1>Cadastro de Clientes</h1>
+            <p>
+                Python + Flask + Azure SQL Database
+            </p>
+        </header>
+
+        {% if mensagem %}
+
+            <div class="mensagem">
+                {{ mensagem }}
+            </div>
+
+        {% endif %}
+
+        <form method="POST" action="{{ url_for('index') }}">
+            <div class="campo">
+                <label for="nome">
+                    Nome completo
+                </label>
+                <input
+                    type="text"
+                    id="nome"
+                    name="nome"
+                    placeholder="Digite o nome do cliente"
+                    required
+                >
+            </div>
+
+            <div class="campo">
+
+                <label for="cpf">
+                    CPF
+                </label>
+
+                <input
+                    type="text"
+                    id="cpf"
+                    name="cpf"
+                    placeholder="000.000.000-00"
+                    maxlength="14"
+                    required
+                >
+
+            </div>
+
+            <div class="campo">
+
+                <label for="telefone">
+                    Telefone
+                </label>
+
+                <input
+                    type="text"
+                    id="telefone"
+                    name="telefone"
+                    placeholder="(11) 99999-9999"
+                    required
+                >
+
+            </div>
+
+            <button type="submit">
+                Cadastrar cliente
+            </button>
+
+        </form>
+
+    </section>
+
+    <section class="card tabela-card">
+
+        <h2>Clientes cadastrados</h2>
+
+        {% if clientes %}
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>CPF</th>
+                    <th>Telefone</th>
+                    <th>Ações</th>
+                </tr>
+
+            </thead>
+            <tbody>
+
+                {% for cliente in clientes %}
+                <tr>
+                    <td>
+                        {{ cliente[0] }}
+                    </td>
+
+                    <td>
+                        {{ cliente[1] }}
+                    </td>
+
+                    <td>
+                        {{ cliente[2] }}
+                    </td>
+
+                    <td>
+                        {{ cliente[3] }}
+                    </td>
+
+                    <td>
+                        <a
+                            href="{{ url_for('editar', cliente_id=cliente[0]) }}"
+                        >
+                            Editar
+                        </a>
+
+                        <form
+                            method="POST"
+                            action="{{ url_for('excluir', cliente_id=cliente[0]) }}"
+                            style="display:inline"
+                        >
+                            <button type="submit">
+                                Excluir
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {% else %}
+
+        <p>
+            Nenhum cliente cadastrado
+        </p>
+
+        {% endif %}
+
+    </section>
+
+    <p class="rodape">
+        Python + Flask + Azure SQL Database
+    </p>
+
+</main>
+
+</body>
+
+</html>
