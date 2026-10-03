@@ -8,39 +8,22 @@ set -euo pipefail
 # ==========================================================
 
 RESOURCE_GROUP="rg-flask-clientes"
-#
-# Altere para uma Região disponível em sua política
-#
-LOCATION="brazilsouth"
-
 APP_SERVICE_PLAN="plan-flask-clientes"
-#
-# Altere para seu RM
-#
-APP_NAME="flask-cadastro-rm9999"
-
 RUNTIME="PYTHON:3.14"
 SKU="F1"
-
-#
-# Altere para seu RM
-#
-SQL_SERVER="sql-server-rm9999"
 SQL_DATABASE="clientes"
-
-#
-# Recupera as Variáveis de Ambiente
-#
-SQL_USERNAME="${SQL_USERNAME:-sqladmin}"
-SQL_PASSWORD="${SQL_PASSWORD:SenhadoBanco#3000}"
-
-#
-# Liberar todos os IPs (SOMENTE EM EMBIENTE DE DESENVOLVIMENTO)
-#
 IP_START="0.0.0.0"
 IP_END="255.255.255.255"
-
 SQL_FILE="sql/01-criar-tabela.sql"
+
+#
+# Recupera as Variáveis de Ambiente (Padrão Terminal Bash)
+#
+LOCATION="${LOCATION:-brazilsouth}"
+APP_NAME="${APP_NAME:-flask-cadastro-rm9999}"
+SQL_USERNAME="${SQL_USERNAME:-sqladmin}"
+SQL_PASSWORD="${SQL_PASSWORD:-SenhadoBanco#3000}"
+SQL_SERVER="${SQL_SERVER:-sql-server-rm9999}"
 
 # ==========================================================
 # INSTALAR SQLCMD
