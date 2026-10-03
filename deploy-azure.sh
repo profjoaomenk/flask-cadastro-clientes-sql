@@ -65,7 +65,6 @@ echo "=================================================="
 if command -v sqlcmd >/dev/null 2>&1; then
 
     echo "sqlcmd já está instalado"
-
     sqlcmd --version
 
 else
@@ -73,31 +72,25 @@ else
     echo "sqlcmd não encontrado."
     echo "Instalando sqlcmd..."
 
-    # ------------------------------------------------------
-    # Azure Cloud Shell utiliza Azure Linux.
-    # Instalação através do instalador oficial da Microsoft
-    # ------------------------------------------------------
+    mkdir -p "$HOME/bin"
 
-    curl -L \
-        https://aka.ms/download-msodbcsql \
-        -o /tmp/msodbcsql.tar.gz
-
-    echo
-    echo "Instalando ferramentas SQL da Microsoft..."
-
-    # Instalação do sqlcmd moderno através do pacote oficial.
     curl -L \
         https://github.com/microsoft/go-sqlcmd/releases/latest/download/sqlcmd-linux-amd64.tar.bz2 \
         -o /tmp/sqlcmd.tar.bz2
+
+    echo
+    echo "Extraindo sqlcmd..."
 
     mkdir -p /tmp/sqlcmd
 
     tar -xjf /tmp/sqlcmd.tar.bz2 \
         -C /tmp/sqlcmd
 
-    cp /tmp/sqlcmd/sqlcmd /usr/local/bin/sqlcmd
+    cp /tmp/sqlcmd/sqlcmd "$HOME/bin/sqlcmd"
 
-    chmod +x /usr/local/bin/sqlcmd
+    chmod +x "$HOME/bin/sqlcmd"
+
+    export PATH="$HOME/bin:$PATH"
 
     echo
     echo "sqlcmd instalado"
@@ -105,7 +98,6 @@ else
     sqlcmd --version
 
 fi
-
 
 # ==========================================================
 # RESOURCE GROUP
