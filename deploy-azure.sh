@@ -28,7 +28,11 @@ SKU="F1"
 SQL_SERVER="sql-server-rm9999"
 SQL_DATABASE="clientes"
 
+#
+# Recupera as Variáveis de Ambiente
+#
 SQL_USERNAME="${SQL_USERNAME:-sqladmin}"
+SQL_PASSWORD="${SQL_PASSWORD:SenhadoBanco#3000}"
 
 #
 # Liberar todos os IPs (SOMENTE EM EMBIENTE DE DESENVOLVIMENTO)
@@ -36,38 +40,7 @@ SQL_USERNAME="${SQL_USERNAME:-sqladmin}"
 IP_START="0.0.0.0"
 IP_END="255.255.255.255"
 
-PROJECT_DIR="flask-cadastro-clientes-sql"
-
 SQL_FILE="sql/01-criar-tabela.sql"
-
-
-# ==========================================================
-# SENHA DO AZURE SQL
-# ==========================================================
-
-if [ -z "${SQL_PASSWORD:-}" ]; then
-
-    echo
-    echo "Senha do administrador do Azure SQL"
-    echo
-
-    read -s -p "SQL_PASSWORD: " SQL_PASSWORD
-
-    echo
-
-    export SQL_PASSWORD
-
-fi
-
-
-if [ -z "$SQL_PASSWORD" ]; then
-
-    echo "ERRO: SQL_PASSWORD não foi informada"
-
-    exit 1
-
-fi
-
 
 # ==========================================================
 # INSTALAR SQLCMD
