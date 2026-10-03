@@ -171,6 +171,7 @@ else
         --server "$SQL_SERVER" \
         --resource-group "$RESOURCE_GROUP" \
         --service-objective Basic \
+        --backup-storage-redundancy Local \
         --output table
 
 fi
