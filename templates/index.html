@@ -3,11 +3,14 @@
 
 <head>
     <meta charset="UTF-8">
+
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0"
     >
+
     <title>Cadastro de Clientes</title>
+
     <link
         rel="stylesheet"
         href="{{ url_for('static', filename='style.css') }}"
@@ -17,13 +20,23 @@
 <body>
 
 <main class="container">
+
+    <!-- ==================================================
+         FORMULÁRIO
+         ================================================== -->
+
     <section class="card">
+
         <header class="header">
+
             <h1>Cadastro de Clientes</h1>
+
             <p>
                 Python + Flask + Azure SQL Database
             </p>
+
         </header>
+
 
         {% if mensagem %}
 
@@ -33,11 +46,18 @@
 
         {% endif %}
 
-        <form method="POST" action="{{ url_for('index') }}">
+
+        <form
+            method="POST"
+            action="{{ url_for('index') }}"
+        >
+
             <div class="campo">
+
                 <label for="nome">
                     Nome completo
                 </label>
+
                 <input
                     type="text"
                     id="nome"
@@ -45,7 +65,9 @@
                     placeholder="Digite o nome do cliente"
                     required
                 >
+
             </div>
+
 
             <div class="campo">
 
@@ -64,6 +86,7 @@
 
             </div>
 
+
             <div class="campo">
 
                 <label for="telefone">
@@ -80,6 +103,7 @@
 
             </div>
 
+
             <button type="submit">
                 Cadastrar cliente
             </button>
@@ -88,27 +112,47 @@
 
     </section>
 
+
+    <!-- ==================================================
+         CLIENTES
+         ================================================== -->
+
     <section class="card tabela-card">
 
-        <h2>Clientes cadastrados</h2>
+        <h2>
+            Clientes cadastrados
+        </h2>
+
 
         {% if clientes %}
 
         <table>
+
             <thead>
+
                 <tr>
+
                     <th>ID</th>
+
                     <th>Nome</th>
+
                     <th>CPF</th>
+
                     <th>Telefone</th>
+
                     <th>Ações</th>
+
                 </tr>
 
             </thead>
+
+
             <tbody>
 
                 {% for cliente in clientes %}
+
                 <tr>
+
                     <td>
                         {{ cliente[0] }}
                     </td>
@@ -126,36 +170,50 @@
                     </td>
 
                     <td>
+
                         <a
                             href="{{ url_for('editar', cliente_id=cliente[0]) }}"
                         >
                             Editar
                         </a>
 
+
                         <form
                             method="POST"
                             action="{{ url_for('excluir', cliente_id=cliente[0]) }}"
                             style="display:inline"
                         >
+
                             <button type="submit">
                                 Excluir
                             </button>
+
                         </form>
+
                     </td>
+
                 </tr>
+
                 {% endfor %}
+
             </tbody>
+
         </table>
 
         {% else %}
 
-        <p>
-            Nenhum cliente cadastrado
-        </p>
+            <p>
+                Nenhum cliente cadastrado
+            </p>
 
         {% endif %}
 
     </section>
+
+
+    <!-- ==================================================
+         RODAPÉ
+         ================================================== -->
 
     <p class="rodape">
         Python + Flask + Azure SQL Database
