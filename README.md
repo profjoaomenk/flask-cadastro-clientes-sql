@@ -72,10 +72,6 @@ Durante a implantação serão criados os seguintes recursos:
 | Azure SQL Database | `clientes`              |
 | Tabela             | `cadastro`              |
 
-> **Importante 1:** o nome do Web App e SQL Server precisam ser globalmente únicos no Azure. Caso `flask-cadastro-rm9999` ou `sql-server-rm9999` já esteja em uso, altere as variável `APP_NAME` e `SQL_SERVER` no arquivo `deploy-azure.sh`.
-
-> **Importante 2:** Substitua a região no script por uma da lista de sua política na variável `LOCATION`
-
 ---
 
 # 3. Estrutura do projeto
@@ -204,35 +200,29 @@ az account show --output table
 
 # 7. Configuração das credenciais do Azure SQL
 
-O projeto não armazena a senha do banco no código
-
 O script utiliza as seguintes variáveis:
 
 ```text
+LOCATION
+APP_NAME
 SQL_USERNAME
 SQL_PASSWORD
+SQL_SERVER
 ```
 
 No Cloud Shell, configure:
 
 ```bash
+export LOCATION="brazilsouth"
+export APP_NAME="flask-cadastro-rm9999"
 export SQL_USERNAME="sqladmin"
-export SQL_PASSWORD="SUA_SENHA_FORTE"
+export SQL_PASSWORD="SenhadoBanco#3000"
+export SQL_SERVER="sql-server-rm9999"
 ```
 
-Para confirmar o usuário:
-
-```bash
-echo "$SQL_USERNAME"
-```
-
-Não execute:
-
-```bash
-echo "$SQL_PASSWORD"
-```
-
-para evitar expor a senha no terminal
+Altere sua Região de acordo com a Política da sua assinatura
+Altere a senha conforme preferência/necessidade
+Altere o número do RM para o seu
 
 ---
 
@@ -253,7 +243,7 @@ Exemplo:
 AzureSql#2026Senha
 ```
 
-Não utilize essa senha em ambientes reais.
+Não utilize essa senha em ambientes reais
 
 ---
 
@@ -290,22 +280,20 @@ Execute:
 O script realizará automaticamente as seguintes etapas:
 
 ```text
-1. Verificar Azure CLI
-2. Verificar login
-3. Verificar sqlcmd
-4. Instalar sqlcmd se necessário
-5. Criar Resource Group
-6. Criar Azure SQL Server
-7. Criar Azure SQL Database
-8. Configurar Firewall
-9. Criar tabela cadastro
-10. Criar App Service Plan
-11. Criar Web App
-12. Configurar variáveis de ambiente
-13. Configurar Startup Command
-14. Empacotar aplicação
-15. Realizar deploy
-16. Reiniciar Web App
+01. Verificar sqlcmd
+02. Instalar sqlcmd se necessário
+03. Criar Resource Group
+04. Criar Azure SQL Server
+05. Criar Azure SQL Database
+06. Configurar Firewall
+07. Criar tabela cadastro
+08. Criar App Service Plan
+09. Criar Web App
+10. Configurar variáveis de ambiente
+11. Configurar Startup Command
+12. Empacotar aplicação
+13. Realizar deploy
+14. Reiniciar Web App
 ```
 
 ---
@@ -321,7 +309,7 @@ command -v sqlcmd
 Caso já esteja instalado:
 
 ```text
-sqlcmd já está instalado.
+sqlcmd já está instalado
 ```
 
 Caso contrário, o script realiza automaticamente a instalação.
@@ -332,7 +320,7 @@ Depois verifica:
 sqlcmd --version
 ```
 
-Isso permite executar o projeto no Azure Cloud Shell mesmo quando o `sqlcmd` não está previamente instalado.
+Isso permite executar o projeto no Azure Cloud Shell mesmo quando o `sqlcmd` não está previamente instalado
 
 ---
 
@@ -352,7 +340,7 @@ az group create \
     --location brazilsouth
 ```
 
-Todos os recursos principais da atividade ficarão agrupados nesse Resource Group.
+Todos os recursos principais da atividade ficarão agrupados nesse Resource Group
 
 ---
 
@@ -398,7 +386,7 @@ O banco ficará dentro do servidor:
 sql-server-rm9999
 ```
 
-Portanto:
+Estrutura:
 
 ```text
 Azure SQL Server
