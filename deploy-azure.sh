@@ -19,11 +19,39 @@ SQL_FILE="sql/01-criar-tabela.sql"
 #
 # Recupera as Variáveis de Ambiente (Padrão Terminal Bash)
 #
-LOCATION="${LOCATION:-brazilsouth}"
-APP_NAME="${APP_NAME:-flask-cadastro-rm9999}"
-SQL_USERNAME="${SQL_USERNAME:-sqladmin}"
-SQL_PASSWORD="${SQL_PASSWORD:-SenhadoBanco#3000}"
-SQL_SERVER="${SQL_SERVER:-sql-server-rm9999}"
+LOCATION="${LOCATION:-}"
+APP_NAME="${APP_NAME:-}"
+SQL_USERNAME="${SQL_USERNAME:-}"
+SQL_PASSWORD="${SQL_PASSWORD:-}"
+SQL_SERVER="${SQL_SERVER:-}"
+
+#
+# Validação das Variáveis de Ambiente (Padrão Terminal Bash)
+#
+if [ -z "$LOCATION" ]; then
+    echo "ERRO: LOCATION não foi definida"
+    exit 1
+fi
+
+if [ -z "$APP_NAME" ]; then
+    echo "ERRO: APP_NAME não foi definida"
+    exit 1
+fi
+
+if [ -z "$SQL_USERNAME" ]; then
+    echo "ERRO: SQL_USERNAME não foi definida"
+    exit 1
+fi
+
+if [ -z "$SQL_PASSWORD" ]; then
+    echo "ERRO: SQL_PASSWORD não foi definida"
+    exit 1
+fi
+
+if [ -z "$SQL_SERVER" ]; then
+    echo "ERRO: SQL_SERVER não foi definida"
+    exit 1
+fi
 
 # ==========================================================
 # INSTALAR SQLCMD
