@@ -1,44 +1,575 @@
-.tabela-card {
-    max-width: 1100px;
-    margin-top: 30px;
+/* ==========================================================
+   RESET
+   ========================================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-.tabela-card h2 {
-    margin-top: 0;
+:root {
+    --azure: #0078d4;
+    --azure-dark: #005a9e;
+    --azure-light: #eaf4ff;
+
+    --background: #f4f7fb;
+    --card: #ffffff;
+
+    --text: #1f2937;
+    --text-light: #64748b;
+    --border: #e2e8f0;
+
+    --success-bg: #ecfdf3;
+    --success-text: #087443;
+
+    --danger: #d92d20;
+    --danger-dark: #b42318;
+
+    --shadow:
+        0 10px 30px rgba(15, 23, 42, 0.08);
+
+    --radius: 18px;
+}
+
+
+/* ==========================================================
+   BODY
+   ========================================================== */
+
+body {
+    min-height: 100vh;
+
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f7fbff 0%,
+            #eef5fb 50%,
+            #f8fafc 100%
+        );
+
+    color: var(--text);
+
+    padding: 40px 20px;
+}
+
+
+/* ==========================================================
+   CONTAINER
+   ========================================================== */
+
+.container {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+
+/* ==========================================================
+   CARD
+   ========================================================== */
+
+.card {
+    background: var(--card);
+
+    border: 1px solid rgba(226, 232, 240, 0.9);
+
+    border-radius: var(--radius);
+
+    padding: 32px;
+
+    margin-bottom: 24px;
+
+    box-shadow: var(--shadow);
+}
+
+
+/* ==========================================================
+   HEADER
+   ========================================================== */
+
+.header {
+    position: relative;
+
+    margin: -32px -32px 30px;
+
+    padding: 30px 32px;
+
+    border-radius: var(--radius) var(--radius) 0 0;
+
+    background:
+        linear-gradient(
+            135deg,
+            #0078d4 0%,
+            #106ebe 55%,
+            #005a9e 100%
+        );
+
+    color: white;
+
+    overflow: hidden;
+}
+
+
+/* detalhe visual no cabeçalho */
+
+.header::after {
+    content: "";
+
+    position: absolute;
+
+    width: 180px;
+    height: 180px;
+
+    right: -60px;
+    top: -90px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.08);
+}
+
+
+.header h1 {
+    position: relative;
+
+    z-index: 1;
+
+    font-size: 30px;
+    font-weight: 700;
+
+    letter-spacing: -0.5px;
+
+    margin-bottom: 7px;
+}
+
+
+.header p {
+    position: relative;
+
+    z-index: 1;
+
+    font-size: 15px;
+
+    color: rgba(255, 255, 255, 0.88);
+}
+
+
+/* ==========================================================
+   MENSAGEM
+   ========================================================== */
+
+.mensagem {
+    padding: 14px 16px;
+
+    margin-bottom: 24px;
+
+    border-radius: 10px;
+
+    border: 1px solid #b7ebd0;
+
+    background: var(--success-bg);
+
+    color: var(--success-text);
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+
+/* ==========================================================
+   FORMULÁRIO
+   ========================================================== */
+
+form {
+    width: 100%;
+}
+
+
+.campo {
     margin-bottom: 20px;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
+
+.campo label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #334155;
+
     font-size: 14px;
+
+    font-weight: 600;
 }
 
-th,
-td {
-    padding: 12px;
-    border-bottom: 1px solid var(--border);
-    text-align: left;
+
+.campo input {
+    width: 100%;
+
+    height: 48px;
+
+    padding: 0 15px;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    color: var(--text);
+
+    font-size: 15px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
 }
 
-th {
-    background: #f2f6fa;
+
+.campo input::placeholder {
+    color: #94a3b8;
 }
 
-td a {
-    color: var(--azure);
-    text-decoration: none;
+
+.campo input:hover {
+    border-color: #94a3b8;
+}
+
+
+.campo input:focus {
+    border-color: var(--azure);
+
+    background: #ffffff;
+
+    box-shadow:
+        0 0 0 4px rgba(0, 120, 212, 0.12);
+}
+
+
+/* ==========================================================
+   BOTÃO PRINCIPAL
+   ========================================================== */
+
+button {
+    width: 100%;
+
+    min-height: 48px;
+
+    padding: 12px 20px;
+
+    margin-top: 5px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--azure),
+            var(--azure-dark)
+        );
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.2s ease,
+        filter 0.2s ease;
+}
+
+
+button:hover {
+    filter: brightness(1.05);
+
+    box-shadow:
+        0 6px 16px rgba(0, 120, 212, 0.25);
+
+    transform: translateY(-1px);
+}
+
+
+button:active {
+    transform: translateY(0);
+}
+
+
+/* ==========================================================
+   TABELA
+   ========================================================== */
+
+.tabela-card {
+    max-width: 1100px;
+
+    margin-top: 30px;
+
+    overflow: hidden;
+}
+
+
+.tabela-card h2 {
+    margin: 0 0 22px;
+
+    color: #1e293b;
+
+    font-size: 21px;
+
     font-weight: 700;
 }
 
-td button {
-    width: auto;
-    padding: 6px 10px;
-    margin-left: 5px;
-    font-size: 12px;
+
+table {
+    width: 100%;
+
+    border-collapse: separate;
+
+    border-spacing: 0;
+
+    font-size: 14px;
+
+    overflow: hidden;
+
+    border: 1px solid var(--border);
+
+    border-radius: 12px;
 }
 
+
+thead th {
+    padding: 14px 16px;
+
+    background: #f1f6fb;
+
+    color: #475569;
+
+    border-bottom: 1px solid var(--border);
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.4px;
+
+    text-align: left;
+}
+
+
+tbody td {
+    padding: 15px 16px;
+
+    border-bottom: 1px solid #edf1f5;
+
+    color: #475569;
+
+    vertical-align: middle;
+}
+
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+tbody tr {
+    background: white;
+
+    transition:
+        background 0.15s ease;
+}
+
+
+tbody tr:hover {
+    background: #f8fbff;
+}
+
+
+/* ID */
+
+tbody td:first-child {
+    color: #64748b;
+
+    font-weight: 700;
+}
+
+
+/* ==========================================================
+   LINKS
+   ========================================================== */
+
+td a {
+    display: inline-block;
+
+    color: var(--azure);
+
+    text-decoration: none;
+
+    font-weight: 700;
+
+    margin-right: 6px;
+
+    transition: color 0.15s ease;
+}
+
+
+td a:hover {
+    color: var(--azure-dark);
+
+    text-decoration: underline;
+}
+
+
+/* ==========================================================
+   BOTÃO EXCLUIR
+   ========================================================== */
+
+td form {
+    display: inline;
+}
+
+
+td button {
+    width: auto;
+
+    min-height: auto;
+
+    padding: 7px 11px;
+
+    margin: 0;
+
+    border-radius: 7px;
+
+    background: #fff1f0;
+
+    border: 1px solid #ffd5d2;
+
+    color: var(--danger);
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    box-shadow: none;
+
+    transform: none;
+}
+
+
+td button:hover {
+    background: #ffe4e1;
+
+    color: var(--danger-dark);
+
+    border-color: #ffb8b2;
+
+    box-shadow: none;
+
+    transform: none;
+}
+
+
+/* ==========================================================
+   LINK VOLTAR
+   ========================================================== */
+
+.card > p a {
+    color: var(--azure);
+
+    text-decoration: none;
+
+    font-weight: 700;
+}
+
+
+.card > p a:hover {
+    text-decoration: underline;
+}
+
+
+/* ==========================================================
+   ESTADO SEM CLIENTES
+   ========================================================== */
+
+.tabela-card > p {
+    padding: 30px;
+
+    border-radius: 10px;
+
+    background: #f8fafc;
+
+    border: 1px dashed #cbd5e1;
+
+    color: var(--text-light);
+
+    text-align: center;
+
+    font-size: 14px;
+}
+
+
+/* ==========================================================
+   RODAPÉ
+   ========================================================== */
+
+.rodape {
+    text-align: center;
+
+    color: #94a3b8;
+
+    font-size: 13px;
+
+    padding: 5px 0 20px;
+}
+
+
+/* ==========================================================
+   RESPONSIVIDADE
+   ========================================================== */
+
 @media (max-width: 800px) {
+
+    body {
+        padding: 20px 12px;
+    }
+
+    .card {
+        padding: 22px;
+
+        border-radius: 14px;
+    }
+
+    .header {
+        margin: -22px -22px 24px;
+
+        padding: 24px 22px;
+
+        border-radius: 14px 14px 0 0;
+    }
+
+    .header h1 {
+        font-size: 25px;
+    }
 
     .tabela-card {
         overflow-x: auto;
@@ -46,5 +577,43 @@ td button {
 
     table {
         min-width: 750px;
+    }
+}
+
+
+/* ==========================================================
+   CELULAR
+   ========================================================== */
+
+@media (max-width: 480px) {
+
+    body {
+        padding: 12px 8px;
+    }
+
+    .card {
+        padding: 18px;
+    }
+
+    .header {
+        margin: -18px -18px 22px;
+
+        padding: 22px 18px;
+    }
+
+    .header h1 {
+        font-size: 23px;
+    }
+
+    .header p {
+        font-size: 13px;
+    }
+
+    .campo input {
+        height: 46px;
+    }
+
+    button {
+        min-height: 46px;
     }
 }
