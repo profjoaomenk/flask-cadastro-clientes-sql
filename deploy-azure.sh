@@ -62,24 +62,31 @@ echo "=================================================="
 echo "VERIFICANDO SQLCMD"
 echo "=================================================="
 
+mkdir -p "$HOME/bin"
+
+export PATH="$HOME/bin:$PATH"
+
+if ! grep -q 'export PATH="$HOME/bin:$PATH"' "$HOME/.bashrc" 2>/dev/null; then
+    echo 'export PATH="$HOME/bin:$PATH"' >> "$HOME/.bashrc"
+fi
+
 if command -v sqlcmd >/dev/null 2>&1; then
-
+    echo
     echo "sqlcmd já está instalado"
+    echo
     sqlcmd --version
-
 else
-
-    echo "sqlcmd não encontrado."
+    echo
+    echo "sqlcmd não encontrado"
     echo "Instalando sqlcmd..."
 
-    mkdir -p "$HOME/bin"
+    rm -f /tmp/sqlcmd.tar.bz2
 
     curl -L \
         https://github.com/microsoft/go-sqlcmd/releases/latest/download/sqlcmd-linux-amd64.tar.bz2 \
         -o /tmp/sqlcmd.tar.bz2
 
-    echo
-    echo "Extraindo sqlcmd..."
+    rm -rf /tmp/sqlcmd
 
     mkdir -p /tmp/sqlcmd
 
@@ -94,10 +101,26 @@ else
 
     echo
     echo "sqlcmd instalado"
+    echo
 
-    sqlcmd --version
+    if command -v sqlcmd >/dev/null 2>&1; then
+        echo "Localização:"
+        command -v sqlcmd
+
+        echo
+        echo "Versão:"
+        sqlcmd --version
+
+    else
+
+        echo
+        echo "ERRO: sqlcmd não foi encontrado após a instalação"
+        exit 1
+
+    fi
 
 fi
+
 
 # ==========================================================
 # RESOURCE GROUP
